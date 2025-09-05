@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freaks: Mental Health Support for Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+
+            function showPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    page.classList.add('hidden');
+                });
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    targetPage.classList.remove('hidden');
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = e.target.dataset.page;
+                    const pageId = `${targetPage}-page`;
+                    showPage(pageId);
+                });
+            });
+
+            // Show the home page on initial load
+            showPage('home-page');
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+        .page-content {
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .bg-gradient-blue {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        }
+        .text-gradient-blue {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #60a5fa, #3b82f6);
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-lg backdrop-blur-md bg-opacity-80">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-gradient-blue transition-transform transform hover:scale-105">Freaks</a>
+            <div class="flex flex-wrap justify-center mt-4 md:mt-0 space-x-2 md:space-x-4">
+                <a href="#home" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="home">Home</a>
+                <a href="#chatbot" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="chatbot">AI Chatbot</a>
+                <a href="#booking" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="booking">Bookings</a>
+                <a href="#resources" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="resources">Resources</a>
+                <a href="#forum" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="forum">Forum</a>
+                <a href="#journal" class="nav-link text-slate-600 hover:text-blue-500 font-medium px-3 py-2 rounded-lg transition-colors" data-page="journal">Journaling</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Login Page -->
+        <div id="login-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">Login</h2>
+            <div class="max-w-md mx-auto card p-6 md:p-8">
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="login-email" class="block text-slate-700 font-medium">Email Address</label>
+                        <input type="email" id="login-email" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" required>
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-slate-700 font-medium">Password</label>
+                        <input type="password" id="login-password" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" required>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">Login</button>
+                </form>
+                <div id="login-success" class="hidden mt-4 text-green-600 font-semibold">Login successful!</div>
+                <div id="login-error" class="hidden mt-4 text-red-600 font-semibold">Login failed. Please check your credentials.</div>
+            </div>
+        </div>
+
+        <!-- Home Page -->
+        <div id="home-page" class="page-content active">
+            <div class="flex flex-col md:flex-row items-center gap-8 py-16">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">Your Journey to <span class="text-gradient-blue">Well-being</span> Starts Here.</h1>
+                    <p class="mt-4 text-lg text-slate-600 max-w-xl mx-auto md:mx-0">Freaks is a confidential digital platform designed to provide a safe space and vital support for students' mental health and psychological well-being.</p>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <!-- Placeholder for an image or illustration -->
+                    <div class="w-full max-w-md h-64 md:h-96 rounded-3xl bg-slate-200 animate-pulse flex items-center justify-center">
+                        <span class="text-slate-500 text-lg">Illustration Placeholder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chatbot Page -->
+        <div id="chatbot-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">AI-Navigated First Support</h2>
+            <div class="max-w-3xl mx-auto card p-6 md:p-8">
+                <div class="h-96 overflow-y-auto mb-4 p-4 rounded-xl border border-slate-200" id="chat-messages">
+                    <!-- Chat messages will be added here -->
+                    <div class="flex items-start gap-3 mb-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">AI</div>
+                        <div class="p-4 rounded-xl bg-slate-100 max-w-md">
+                            <p class="text-slate-700">Hello! I'm here to listen. How are you feeling today? You can share what's on your mind, and I can suggest some coping strategies or resources.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-end gap-3 mb-4">
+                        <div class="p-4 rounded-xl bg-blue-100 max-w-md">
+                            <p class="text-slate-700">I've been feeling a bit stressed about my exams.</p>
+                        </div>
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-500 flex items-center justify-center text-white font-bold">You</div>
+                    </div>
+                    <div class="flex items-start gap-3 mb-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">AI</div>
+                        <div class="p-4 rounded-xl bg-slate-100 max-w-md">
+                            <p class="text-slate-700">That's completely normal. Breathing exercises can be really helpful. Would you like to try one, or would you prefer a different exercise, like a guided meditation?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <input type="text" placeholder="Type your message..." class="flex-1 p-3 rounded-full border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confidential Booking System Page -->
+        <div id="booking-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">Confidential Booking System</h2>
+            <div class="max-w-2xl mx-auto card p-6 md:p-8">
+                <p class="mb-6 text-slate-600">Schedule a confidential session with a professional counselor. All communications are encrypted and private.  </p>
+                <form id="booking-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-slate-700 font-medium">Full Name</label>
+                        <input type="text" id="name" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-slate-700 font-medium">Email Address</label>
+                        <input type="email" id="email" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" required>
+                    </div>
+                    <div>
+                        <label for="mode" class="block text-slate-700 font-medium">Consultation Mode</label>
+                        <select id="mode" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3">
+                            <option>Face-to-face</option>
+                            <option>Online Video Call</option>
+                            <option>Phone Consultation</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date" class="block text-slate-700 font-medium">Preferred Date</label>
+                        <input type="date" id="date" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-slate-700 font-medium">Reason for Session (Optional)</label>
+                        <textarea id="message" rows="4" class="mt-1 block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">Book Appointment</button>
+                </form>
+                <div id="booking-success" class="hidden mt-4 text-green-600 font-semibold">Appointment booked successfully!</div>
+                <div id="booking-error" class="hidden mt-4 text-red-600 font-semibold">Failed to book appointment. Please try again.</div>
+            </div>
+        </div>
+
+        <!-- Psychoeducational Resource Hub Page -->
+        <div id="resources-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">Psychoeducational Resource Hub</h2>
+            <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto">Explore a curated collection of videos, audios, and guides to better understand mental health. Resources are available in multiple languages to reduce stigma at home.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Resource Card 1 -->
+                <div class="card p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105">
+                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-4xl">🧘</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">Mindfulness Meditations</h3>
+                    <p class="mt-2 text-slate-600">Learn to calm your mind and find presence with our guided audio sessions.</p>
+                    <a href="#" class="mt-4 text-blue-500 font-medium hover:underline">Listen Now</a>
+                </div>
+                <!-- Resource Card 2 -->
+                <div class="card p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105">
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-4xl">📚</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">CBT Exercises for Anxiety</h3>
+                    <p class="mt-2 text-slate-600">Practical guides and worksheets to reframe negative thoughts and reduce anxiety.</p>
+                    <a href="#" class="mt-4 text-blue-500 font-medium hover:underline">Read More</a>
+                </div>
+                <!-- Resource Card 3 -->
+                <div class="card p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105">
+                    <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-4xl">👨‍👩‍👧‍👦</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">Talking to Your Family</h3>
+                    <p class="mt-2 text-slate-600">Family-friendly videos and guides to help you communicate about your mental health.</p>
+                    <a href="#" class="mt-4 text-blue-500 font-medium hover:underline">Watch Video</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peer Support Forum Page -->
+        <div id="forum-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">Peer Support Forum</h2>
+            <div class="max-w-3xl mx-auto card p-6 md:p-8">
+                <div class="h-96 overflow-y-auto mb-4 p-4 rounded-xl border border-slate-200">
+                    <!-- Forum posts will be added here -->
+                    <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-semibold text-blue-600">Anonymous User 1</span>
+                            <span class="text-sm text-slate-500">1 hour ago</span>
+                        </div>
+                        <p class="bg-blue-50 p-3 rounded-lg text-slate-700">Has anyone else struggled with burnout this semester? It feels overwhelming.</p>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-semibold text-green-600">Student Volunteer</span>
+                            <span class="text-sm text-slate-500">45 minutes ago</span>
+                        </div>
+                        <p class="bg-green-50 p-3 rounded-lg text-slate-700">Hey, thanks for sharing. Burnout is a common issue. Remember to take small breaks and be kind to yourself. You can also explore our resources on time management!</p>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-semibold text-purple-600">Anonymous User 2</span>
+                            <span class="text-sm text-slate-500">30 minutes ago</span>
+                        </div>
+                        <p class="bg-purple-50 p-3 rounded-lg text-slate-700">Me too! It helps just knowing I'm not the only one. Thanks for the advice!</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <input type="text" placeholder="Share your thoughts anonymously..." class="flex-1 p-3 rounded-full border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Journaling & Analytics Page -->
+        <div id="journal-page" class="page-content">
+            <h2 class="text-4xl font-bold text-center mb-10 text-slate-900">Journaling & Mood Tracking</h2>
+            <p id="journal-status" class="text-center text-sm font-semibold mb-4"></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Journaling Section -->
+                <div class="card p-6 md:p-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-800">Your Private Journal</h3>
+                    <p class="mb-4 text-slate-600">Write freely and privately.</p>
+                    <textarea id="journal-entry" placeholder="How are you feeling today?" rows="10" class="w-full p-4 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <button id="save-journal-btn" class="mt-4 w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">Save Entry</button>
+                </div>
+                <!-- Analytics Section -->
+                <div class="card p-6 md:p-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-800">Emotional Trends</h3>
+                    <p class="mb-4 text-slate-600">See a weekly visualization of your emotional trends based on your journal entries.</p>
+                    <div class="w-full h-64 bg-slate-100 rounded-xl flex items-center justify-center text-slate-500 border border-dashed border-slate-300">
+                        <!-- Placeholder for a chart -->
+                        <span>Chart Placeholder (Data Visualization)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+// Connect booking form to backend
+document.addEventListener("DOMContentLoaded", function() {
+    const bookingForm = document.getElementById("booking-form");
+    if (bookingForm) {
+        bookingForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const mode = document.getElementById("mode").value;
+            const date = document.getElementById("date").value;
+            const message = document.getElementById("message").value;
+            const successDiv = document.getElementById("booking-success");
+            const errorDiv = document.getElementById("booking-error");
+            successDiv.classList.add("hidden");
+            errorDiv.classList.add("hidden");
+            const token = localStorage.getItem('jwt_token');
+            if (!token) {
+                errorDiv.textContent = 'You must be logged in to book an appointment.';
+                errorDiv.classList.remove("hidden");
+                return;
+            }
+            try {
+                const response = await fetch("http://localhost:5000/api/appointments/book", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ name, email, mode, appointmentDate: date, message })
+                });
+                if (response.ok) {
+                    successDiv.classList.remove("hidden");
+                    bookingForm.reset();
+                } else {
+                    errorDiv.classList.remove("hidden");
+                }
+            } catch (err) {
+                errorDiv.classList.remove("hidden");
+            }
+        });
+    }
+
+    // Login form handler
+    const loginForm = document.getElementById("login-form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+            const successDiv = document.getElementById("login-success");
+            const errorDiv = document.getElementById("login-error");
+            successDiv.classList.add("hidden");
+            errorDiv.classList.add("hidden");
+            try {
+                const response = await fetch("http://localhost:5000/api/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                if (response.ok && data.token) {
+                    localStorage.setItem('jwt_token', data.token);
+                    successDiv.classList.remove("hidden");
+                    // Optionally, redirect or show booking page
+                } else {
+                    errorDiv.classList.remove("hidden");
+                }
+            } catch (err) {
+                errorDiv.classList.remove("hidden");
+            }
+        });
+    }
+});
+</script>
+</html>
